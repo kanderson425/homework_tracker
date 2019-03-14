@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" defer></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="{% static 'scripts/script.js' %}" type="text/javscript" defer></script>
+  <title>GA Homework Tracker</title>
+</head>
+<body>
+
+  <header class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper">
+        <a href="" class="brand-logo left">Home</a> <!-- GA logo here -->
+        <ul class="right">
+          <!-- All the list items below will need to be toggled depending on
+          whether or not the user is logged on, or if they are an instructor -->
+          <li><a href="{% url 'signin' %}">Sign In</a></li>
+          <li><a href="">Sign Out</a></li>
+          <li><a href="{% url 'index' %}">Course Overview</a></li>
+          <li><a href="">Grid View</a></li>
+
+          <a href="#" datatarget="dropdown1" class="dropdown-trigger button"></a>
+          <ul id="dropdown1" class="dropdown-content">
+            <li><a href="#">Reviewed work<span id="reviewed" class="new badge">none</span></a></li>
+            <li><a href="#">Pending Review<span id="need-review" class="new badge">none</span></a></li>
+            <li><a href="#">Missing Work<span id="missing" class="new badge">none</span></li>
+          </ul>
+
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <footer>
+
+  </footer>
+
+</body>
+</html>
