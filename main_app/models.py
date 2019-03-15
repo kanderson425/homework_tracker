@@ -1,3 +1,15 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-# Create your models here.
+class User(AbstractUser):
+    is_student = models.BooleanField(default=False)
+    is_teacher = models.BooleanField(default=False)
+
+class Student(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    assignments = models.ManyToManyField(Assignment, through='CompletedAssignment')
+
+class Instructor(models.Model):
+    instructor = models.OneToOneField(Instructor, on_delete=models.CASCADE, primary_key=True)
+
+
