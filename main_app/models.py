@@ -1,15 +1,13 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.contrib.auth.models import User
 
-class User(AbstractUser):
-    is_student = models.BooleanField(default=False)
-    is_teacher = models.BooleanField(default=False)
+class User(models.Model):
+    is_instructor = models.BooleanField(default=False)
+    def __str__(self):
+        return self.name
 
-class Student(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    assignments = models.ManyToManyField(Assignment, through='CompletedAssignment')
-
-class Instructor(models.Model):
-    instructor = models.OneToOneField(Instructor, on_delete=models.CASCADE, primary_key=True)
-
-
+class Location(models.Model):
+    name = models.CharField(max_length=30)
+    def __str__(self):
+        return self.name
