@@ -2,10 +2,6 @@ from django.forms import ModelForm
 from .models import User, Location
 from django.contrib.auth.forms import UserCreationForm
 
-class UserForm(ModelForm):
-    class Meta:
-        model =
-
 class RegistrationForm(UserCreationForm):
     email = models.EmailField(required=True)
     class Meta:
@@ -18,4 +14,3 @@ class RegistrationForm(UserCreationForm):
         user.email = cleaned_data('email')
         if commit:
             user.save()
-        

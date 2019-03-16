@@ -1,3 +1,4 @@
+from django import forms
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView, UpdateView
 from django.contrib.auth.forms import UserCreationForm
@@ -23,7 +24,7 @@ def signup(request):
             return redirect('index')
         else:
             error_message = 'Invalid credentials = try again'
-    form = UserCreationForm()
+    form = SignUpForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
