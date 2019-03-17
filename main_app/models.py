@@ -1,19 +1,12 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
 from django.db import models
-
-class User(AbstractUser):
-    is_student = models.BooleanField(default=False)
-    is_teacher = models.BooleanField(default=False)
-
-class Student(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    assignments = models.ManyToManyField(Assignment, through='CompletedAssignment')
+from django.db import models
+from django.urls import reverse
+from django.contrib.auth.models import User
 
 class Instructor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    students = models.ManyToManyField(Student, through='Students')
 
-class Assignment(models.Model):
-       students = models.ManyToManyField(Student, through='Students')
-
+class Student(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 

@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Welcome</h1>
-
-<div><p>We here at happy_little_coders & GA would like to present you with
-an application that streamlines uploading and viewing, past, present and future homework.
-Here you can view the curriculum and units in the future</p></div>
+<div class="container center">
+  <h1>Welcome</h1>
+  <br>
+  <h3>General Assembly's Assignment Tracker</h3>
+  <h4>Use this app as a resource to upload and track all of program assignments</h4>
+  <a href="{% url 'signup' %}" class="btn">Create an account</a><a href="" class="btn">Sign In</a>
+</div>
 
 {% endblock %}
