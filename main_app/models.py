@@ -10,6 +10,10 @@ class Student(models.Model):
     assignments = models.ManyToManyField(Assignment, through='CompletedAssignment')
 
 class Instructor(models.Model):
-    instructor = models.OneToOneField(Instructor, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    students = models.ManyToManyField(Student, through='Students')
+
+class Assignment(models.Model):
+       students = models.ManyToManyField(Student, through='Students')
 
 
