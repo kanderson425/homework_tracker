@@ -77,11 +77,7 @@ WSGI_APPLICATION = 'homework_tracker.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'homework_tracker',
-        'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASS', 'darquevanella'),
-        'HOST': '127.0.0.1',
-        'PORT': '1033'
+        'NAME': 'homework_tracker'
     }
 }
 
