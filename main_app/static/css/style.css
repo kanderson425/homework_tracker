@@ -6,3 +6,7 @@ body {
 main {
   flex: 1 0 auto !important;
 }
+
+select {
+  background-color: rgb(238, 110, 115);
+  border: solid black 2px;
