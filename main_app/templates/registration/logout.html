@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container center">
+    <!-- Insert h3 at top that fades out -->
+    <h1>You have successfully logged out!</h1>
+    <h1>Welcome</h1>
+    <br>
+    <h3>General Assembly's Assignment Tracker</h3>
+    <h4>Use this app as a resource to upload and track all of program assignments</h4>
+    <a href="{% url 'signup' %}" class="btn">Create an account</a><a href="" class="btn">Sign In</a>
+</div>
+
+{% endblock %}
