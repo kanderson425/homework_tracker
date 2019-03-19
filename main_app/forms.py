@@ -34,8 +34,8 @@ class RegistrationForm(forms.ModelForm):
         widget = forms.Select(choices=CLASSTYPE_CHOICES)
     ) 
 
-    password1 = forms.CharField(max_length=30, label='', help_text='', widget=forms.PasswordInput(attrs={"placeholder": "Input your password"}))
-    password2 = forms.CharField(max_length=30, label='', help_text='', widget=forms.PasswordInput(attrs={"placeholder": "Confirm your password"}))
+    # password1 = forms.CharField(max_length=30, label='', help_text='', widget=forms.PasswordInput(attrs={"placeholder": "Input your password"}))
+    # password2 = forms.CharField(max_length=30, label='', help_text='', widget=forms.PasswordInput(attrs={"placeholder": "Confirm your password"}))
 
     class Meta:
         model = Profile
@@ -48,9 +48,17 @@ class RegistrationForm(forms.ModelForm):
             'location', 
             'class_start_date', 
             'class_type', 
-            'password1', 
-            'password2'
+            # 'password1', 
+            # 'password2'
         ]
+
+    helper = FormHelper()
+    helper.form_class = 'form-horizontal'
+    FormActions(
+        Submit('save_changes', 'Save changes', css_class="btn-primary"),
+        Submit('cancel', 'Cancel'),
+    )
+    # )        
     
 # class MessageForm(forms.Form):
 #     text_input = forms.CharField()

@@ -1,5 +1,7 @@
 from django.contrib.auth import login
 from django.contrib.auth.models import User
+from django.dispatch import receiver
+# from django.core.signals import post_save
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegistrationForm
@@ -34,13 +36,32 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
+class ProfileCreate(CreateView):
+  model = Profile
+  fields = ['first_name', 'last_name', 'email', 'usertype', 'location', 'class_start_date', 'class_type']
+
+# @receiver(post_save, sender=User)
+# def ensure_profile_exists(sender, **kwargs):
+#   if kwargs.get('created', False):
+#     Profile.objects.get_or_create(user=kwargs.get('instance'))
+
+# def register(request, user_id):
+#   form = RegistrationForm(request.POST)
+#   if form.is_valid():
+#     new_profile = form.save(commit=False)
+#     new_profile.user_id = user_id
+#     new_profile.save()
+#   return redirect('home', user_id=user_id)
+
 # def register(request):
 #   print('This infor should be pushed to the database')
 #   error_message = ''
 #   if request.method == 'POST':
 #     form = RegistrationForm(request.POST)
 #     if form.is_valid():
-#       form.save()
+#       post = form.save(commit=False)
+#       post.user = request.user
+#       post.save()
 #       return redirect('home')
 #     else:
 #       error_message = 'Invalid profile credentials - try again'
@@ -48,13 +69,14 @@ def signup(request):
 #   context = {'form': form, 'error_message': error_message}
 #   return render(request, 'registration/register.html', context)
 
-class ProfileCreate(CreateView):
-  model = Profile
-  fields = ['user', 'first_name', 'last_name', 'email', 'usertype', 'location', 'class_start_date', 'class_type', 'password1', 'password2']
+# def register(request):
+#   class ProfileCreate(CreateView):
+#     model = Profile
+#     fields = ['user', 'first_name', 'last_name', 'email', 'usertype', 'location', 'class_start_date', 'class_type', 'password1', 'password2']
 
-  def form_valid(self, form):
-    form.instance.user = self.request.user
-    return super().form_valid(form)
+#   def form_valid(self, form):
+#     form.instance.user = self.request.user
+#     return super().form_valid(form)
 
 
 # class SignUpForm(UserCreationForm):
