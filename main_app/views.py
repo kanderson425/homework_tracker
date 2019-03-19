@@ -36,18 +36,18 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
-def register(request):
-  error_message = ''
-  if request.method == 'POST':
-    form = RegistrationForm(request.POST)
-    if form.is_valid():
-      profile = form.save()
-      return redirect('index')
-    else:
-      error_message = 'Invalid credentials - try again'
-  form = RegistrationForm()
-  context = {'form': form, 'error_message': error_message}
-  return render(request, './templates/home.html', context)
+# def register(request):
+#   error_message = ''
+#   if request.method == 'POST':
+#     form = RegistrationForm(request.POST)
+#     if form.is_valid():
+#       profile = form.save()
+#       return redirect('index')
+#     else:
+#       error_message = 'Invalid credentials - try again'
+#   form = RegistrationForm()
+#   context = {'form': form, 'error_message': error_message}
+#   return render(request, './templates/home.html', context)
       
 # class ProfileCreate(CreateView):
 #   print('Is the function even running?')
@@ -56,8 +56,8 @@ def register(request):
 #   fields = ['first_name', 'last_name', 'email', 'usertype', 'location', 'class_start_date', 'class_type']
 
 #   def form_valid(self, RegistrationForm):
-#     form.instance.user = self.request.user
-#     return super().form_valid(RegistrationForm)
+#     RegistrationForm.instance.user = self.request.user
+#     return super().RegistrationForm_valid(RegistrationForm)
 #   print('This is a test 123456789')
 #   success_url = './templates/home.html'
 #   print('This is another test 123444444')
@@ -75,21 +75,26 @@ def register(request):
 #     new_profile.save()
 #   return redirect('home', user_id=user_id)
 
-# def register(request):
-#   print('This infor should be pushed to the database')
-#   error_message = ''
-#   if request.method == 'POST':
-#     form = RegistrationForm(request.POST)
-#     if form.is_valid():
-#       post = form.save(commit=False)
-#       post.user = request.user
-#       post.save()
-#       return redirect('home')
-#     else:
-#       error_message = 'Invalid profile credentials - try again'
-#   form = RegistrationForm()
-#   context = {'form': form, 'error_message': error_message}
-#   return render(request, 'registration/register.html', context)
+def register(request):
+  print('This info should be pushed to the database')
+  error_message = ''
+  if request.method == 'POST':
+    form = RegistrationForm(request.POST)
+    print('The request method is working')
+    if form.is_valid():
+      print('the form is valid')
+      post = form.save(commit=False)
+      post.user = request.user
+      post.save()
+      return redirect('./templates/home')
+    else:
+      error_message = 'Invalid profile credentials - try again'
+      print('The form is invalid')
+  print('The request method is not POST')
+  form = RegistrationForm()
+  context = {'form': form, 'error_message': error_message}
+  print('We are re-routing')
+  return render(request, './templates/home', context)
 
 # def register(request):
 #   class ProfileCreate(CreateView):
