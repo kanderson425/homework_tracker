@@ -1,33 +1,60 @@
 from django.contrib.auth import login
 from django.contrib.auth.models import User
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
-from .forms import SignUpForm
+from .forms import RegistrationForm
 from django.shortcuts import render, redirect
 from django.contrib.auth import login 
+from .models import Profile
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html')
+  return render(request, 'home.html')
 
 def index(request):
-    return render(request, 'users/index.html')
+  return render(request, 'users/index.html')
 
 def signin(request):
-    return render(request, 'registration/signin.html')
+  return render(request, 'registration/signin.html')
+
+def registration(request):
+  return render(request, 'registration/registration.html', {'form': RegistrationForm()})
 
 def signup(request):
-  error_message=''
+  error_message = ''
   if request.method == 'POST':
-    form = SignUpForm(request.POST)
+    form = UserCreationForm(request.POST)
     if form.is_valid():
       user = form.save()
       login(request, user)
-      return redirect('home')
+      return redirect('registration')
     else:
       error_message = 'Invalid credentials - try again'
-  form = SignUpForm()
+  form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
+
+# def register(request):
+#   print('This infor should be pushed to the database')
+#   error_message = ''
+#   if request.method == 'POST':
+#     form = RegistrationForm(request.POST)
+#     if form.is_valid():
+#       form.save()
+#       return redirect('home')
+#     else:
+#       error_message = 'Invalid profile credentials - try again'
+#   form = RegistrationForm()
+#   context = {'form': form, 'error_message': error_message}
+#   return render(request, 'registration/register.html', context)
+
+class ProfileCreate(CreateView):
+  model = Profile
+  fields = ['user', 'first_name', 'last_name', 'email', 'usertype', 'location', 'class_start_date', 'class_type', 'password1', 'password2']
+
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
 
 
 # class SignUpForm(UserCreationForm):
