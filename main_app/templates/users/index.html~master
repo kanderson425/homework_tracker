@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for unit in units %}
+  <div class="right_side">
+    <div class="accordion js-accordion">
+      <div class="accordion__item js-accordion-item">
+        <div class="accordion-header js-accordion-header">Unit unit info here </div>
+        <div class="accordion-body__contents">
+          <ul>
+            <li><span>Date: date goes here </span> assignment goes here <button href="#modal1" class="btn modal-trigger">View</button><button class="btn modal-trigger">Download</button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}
