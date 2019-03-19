@@ -6,10 +6,9 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegistrationForm
 from django.shortcuts import render, redirect
-from django.contrib.auth import login 
+from django.contrib.auth import login
 from .models import Profile
 
-# Create your views here.
 def home(request):
   return render(request, 'home.html')
 
@@ -48,7 +47,7 @@ def signup(request):
 #   form = RegistrationForm()
 #   context = {'form': form, 'error_message': error_message}
 #   return render(request, './templates/home.html', context)
-      
+
 # class ProfileCreate(CreateView):
 #   print('Is the function even running?')
 #   model = Profile

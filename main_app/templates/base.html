@@ -7,33 +7,129 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.css"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" defer></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="{% static 'scripts/script.js' %}" type="text/javscript" defer></script>
+  {% block js %}{% endblock %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
   <title>GA Homework Tracker</title>
+  <style>
+
+  body {
+    font-size: 62.5%;
+    background: #dadada;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 2;
+    /* padding: 5em; */
+  }
+
+  .accordion {
+    font-size: 1rem;
+    width: 30vw;
+    margin: 0 auto;
+    border-radius: 5px;
+  }
+
+  .accordion-header,
+  .accordion-body {
+    background: white;
+  }
+
+  .accordion-header {
+    padding: 1.5em 1.5em;
+    background: #3F51B5;
+    text-transform: uppercase;
+    color: white;
+    cursor: pointer;
+    font-size: .8em;
+    letter-spacing: .1em;
+    transition: all .3s;
+  }
+
+  .accordion-header:hover {
+    background: #2D3D99;
+    position: relative;
+    z-index: 5;
+  }
+
+  .accordion-body {
+    background: #fcfcfc;
+    color: #3f3c3c;
+    display: none;
+  }
+
+  .accordion-body__contents {
+    padding: 1.5em 1.5em;
+    font-size: .85em;
+  }
+
+  .accordion__item.active:last-child .accordion-header {
+    border-radius: none;
+  }
+
+  .accordion:first-child > .accordion__item > .accordion-header {
+    border-bottom: 1px solid transparent;
+  }
+
+  .accordion__item > .accordion-header:after {
+    content: "\f3d0";
+    font-family: IonIcons;
+    font-size: 1.2em;
+    float: right;
+    position: relative;
+    top: -2px;
+    transition: .3s all;
+    transform: rotate(0deg);
+  }
+
+  .accordion__item.active > .accordion-header:after {
+    transform: rotate(-180deg);
+  }
+
+  .accordion__item.active .accordion-header {
+    background: #2D3D99;
+  }
+
+  .accordion__item .accordion__item .accordion-header {
+    background: #f1f1f1;
+    color: black;
+  }
+
+  @media screen and (max-width: 1000px) {
+    body {
+      padding: 1em;
+    }
+
+    .accordion {
+      width: 100%;
+    }
+  }
+
+  </style>
 </head>
 <body>
   <header class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
-        <a href="" class="brand-logo left">Home</a> <!-- GA logo here -->
+        <a href="" class="brand-logo left">Home</a>
         <ul class="right">
-          <!-- All the list items below will need to be toggled depending on
-          whether or not the user is logged on, or if they are an instructor -->
           {% if user.is_authenticated %}
           <li><a href="">Course Overview</a></li>
-          <li><a href="">Grid View</a></li>         
-          <li><a href="{% url 'logout' %}">Sign Out</a></li>   
+          <li><a href="{% url 'cohort_select.html' %}">Cohort View</a></li>
+          <li><a href="{% url 'student_detail' %}">Student Detail</a></li>
+          <li><a href="{% url 'logout' %}">Sign Out</a></li>
           <a href="#" datatarget="dropdown1" class="dropdown-trigger button"></a>
           <ul id="dropdown1" class="dropdown-content">
-            <li><a href="#">Reviewed work<span id="reviewed" class="new badge">none</span></a></li>
-            <li><a href="#">Pending Review<span id="need-review" class="new badge">none</span></a></li>
-            <li><a href="#">Missing Work<span id="missing" class="new badge">none</span></li>
+            <li>Reviewed work<span id="reviewed" class="{{ this.student.assignments }}">{{ this.student.assignment.newreviewed }}</span></li>
+            <li>Pending Review<span id="need-review" class="{{ this.student.assignments }}">{{ this.student.assignent.pending }}</span></li>
+            <li><a href="#">Missing Work<span id="missing" class="{{ this.student.assignments }}">{{ this.student.assignment.missing }}</span></li>
           </ul>
           {% else %}
           <li><a href="{% url 'login' %}">Log In</a></li>
-          <li><a href="{% url 'signup' %}">Sign Up</a></li>  
+          <li><a href="{% url 'signup' %}">Sign Up</a></li>
           {% endif %}
         </ul>
       </div>
@@ -72,6 +168,67 @@
   </footer>
 
 </body>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, options);
+  });
+  var accordion = (function() {
+
+    var $accordion = $('.js-accordion');
+    var $accordion_header = $accordion.find('.js-accordion-header');
+    var $accordion_item = $('.js-accordion-item');
+
+    // default settings
+    var settings = {
+      // animation speed
+      speed: 400,
+
+      // close all other accordion items if true
+      oneOpen: false
+    };
+
+    return {
+      // pass configurable object literal
+      init: function($settings) {
+        $accordion_header.on('click', function() {
+          accordion.toggle($(this));
+        });
+
+        $.extend(settings, $settings);
+
+        // ensure only one accordion is active if oneOpen is true
+        if (settings.oneOpen && $('.js-accordion-item.active').length > 1) {
+          $('.js-accordion-item.active:not(:first)').removeClass('active');
+        }
+
+        // reveal the active accordion bodies
+        $('.js-accordion-item.active').find('> .js-accordion-body').show();
+      },
+      toggle: function($this) {
+
+        if (settings.oneOpen && $this[0] != $this.closest('.js-accordion').find('> .js-accordion-item.active > .js-accordion-header')[0]) {
+          $this.closest('.js-accordion')
+            .find('> .js-accordion-item')
+            .removeClass('active')
+            .find('.js-accordion-body')
+            .slideUp()
+        }
+
+        // show/hide the clicked accordion item
+        $this.closest('.js-accordion-item').toggleClass('active');
+        $this.next().stop().slideToggle(settings.speed);
+      }
+    }
+  })();
+
+  $(document).ready(function() {
+    accordion.init({
+      speed: 300,
+      oneOpen: true
+    });
+  });
+</script>
 </html>
 
 <script>

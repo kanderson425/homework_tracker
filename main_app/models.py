@@ -8,7 +8,7 @@ from .choices import USERTYPE_CHOICES, LOCATION_CHOICES, CLASSTYPE_CHOICES, DATE
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200) 
+    last_name = models.CharField(max_length=200)
     email = models.EmailField(max_length=200)
     usertype = models.CharField(max_length=200,choices=USERTYPE_CHOICES)
     location = models.CharField(max_length=200,choices=LOCATION_CHOICES)
