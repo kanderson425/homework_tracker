@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for cohort in cohorts %}
+  <div>
+    <img src="" alt="">
+    <div class="ui pointing link item">
+      <span class="text">WDI Cohort</span>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <div class="item">Select this cohort</div>
+        <div class="item">Edit this cohort</div>
+        <div class="item red darken-4">Delete this cohort</div>
+      </div>
+    </div>
+  </div>
+
+{% endfor %}
+
+{% endblock %}

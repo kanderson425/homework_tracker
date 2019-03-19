@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.css"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" defer></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="{% static 'scripts/script.js' %}" type="text/javscript" defer></script>
@@ -16,12 +18,12 @@
   <title>GA Homework Tracker</title>
   <style>
 
-      body {
+  body {
     font-size: 62.5%;
     background: #dadada;
     font-family: 'Open Sans', sans-serif;
     line-height: 2;
-    padding: 5em;
+    /* padding: 5em; */
   }
 
   .accordion {
@@ -112,20 +114,18 @@
   <header class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
-        <a href="" class="brand-logo left">Home</a> <!-- GA logo here -->
+        <a href="" class="brand-logo left">Home</a>
         <ul class="right">
-          <!-- All the list items below will need to be toggled depending on
-          whether or not the user is logged on, or if they are an instructor -->
           {% if user.is_authenticated %}
           <li><a href="">Course Overview</a></li>
-          <li><a href="">Grid View</a></li>
+          <li><a href="{% url 'cohort_select.html' %}">Cohort View</a></li>
           <li><a href="{% url 'student_detail' %}">Student Detail</a></li>
           <li><a href="{% url 'logout' %}">Sign Out</a></li>
           <a href="#" datatarget="dropdown1" class="dropdown-trigger button"></a>
           <ul id="dropdown1" class="dropdown-content">
-            <li>Reviewed work<span id="reviewed" class="new badge">{{ this.student.assignment.newreviewed }}</span></li>
-            <li>Pending Review<span id="need-review" class="new badge">{{ this.student.assignent.pending }}</span></li>
-            <li><a href="#">Missing Work<span id="missing" class="new badge">{{ this.student.assignment.missing }}</span></li>
+            <li>Reviewed work<span id="reviewed" class="{{ this.student.assignments }}">{{ this.student.assignment.newreviewed }}</span></li>
+            <li>Pending Review<span id="need-review" class="{{ this.student.assignments }}">{{ this.student.assignent.pending }}</span></li>
+            <li><a href="#">Missing Work<span id="missing" class="{{ this.student.assignments }}">{{ this.student.assignment.missing }}</span></li>
           </ul>
           {% else %}
           <li><a href="{% url 'login' %}">Log In</a></li>

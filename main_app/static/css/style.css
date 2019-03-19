@@ -1,14 +1,26 @@
-grid_view_wrapper {
+body {
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
 }
-body {
+
+cohort_img {
+  width: 40%;
+  border-radius: 50%;
+  border: 5px inset black;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+/* body {
   font-size: 62.5%;
   background: #dadada;
   font-family: 'Open Sans', sans-serif;
   line-height: 2;
-  padding: 5em;
-}
+  /* padding: 5em; */
+} */
 
 .accordion {
   font-size: 1rem;
