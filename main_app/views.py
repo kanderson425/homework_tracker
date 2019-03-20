@@ -39,7 +39,7 @@ def signup(request):
 
 def registration(request):
   user = request.user
-  return render(request, 'registration/registration.html', {'form': ProfileForm, 'user': user})
+  return render(request, 'registration/registration.html', {'form': ProfileForm})
 
 
 # def CreateProfile(request, user_id):
@@ -52,8 +52,8 @@ def registration(request):
 #   else:
 #     return redirect('home')
 
-def CreateProfile(request, user_id):
-  print('CreateProfile is getting')
+def CreateProfile(request):
+  print('CreateProfile is getting hit')
   error_message = ''
   if request.method == 'POST':
     # user_form = UserCreationForm(request.POST, instance=request.user)
@@ -62,7 +62,7 @@ def CreateProfile(request, user_id):
     if profile_form.is_valid():
       print('Forms have been validated')
       new_profile = profile_form.save(commit=False)
-      new_profile.user_id = user_id
+      new_profile.user = request.user
       new_profile.save()
     else:
       msg = 'Errors: %s' % profile_form.errors.as_text()
@@ -71,6 +71,15 @@ def CreateProfile(request, user_id):
     print('We are hitting the redirect')
     user_form = UserCreationForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
-  return redirect('index', {'user_form': user_form, 'profile_form': profile_form, 'user_id': user_id})
+  return render('index', {'user': request.user})
  
+
+# def CreateProfile(request, user_id):
+#   form = ProfileForm(request.POST)
+#   if form.is_valid():
+
+#     new_profile = form.save(commit=False)
+#     new_profile.user_id = user_id
+#     new_profile.save()
+#   return redirect('index')
       

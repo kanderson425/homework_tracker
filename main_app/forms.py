@@ -11,28 +11,10 @@ class ProfileForm(forms.ModelForm):
     first_name = forms.CharField(max_length=30, label='', help_text='', widget=forms.TextInput(attrs={"placeholder": "Input your first name"}))
     last_name = forms.CharField(max_length=30, label='', help_text='', widget=forms.TextInput(attrs={"placeholder": "Input your last name"})) 
     email = forms.EmailField(max_length=250, label='', help_text='', widget=forms.TextInput(attrs={"placeholder": "Input your email"}))
-
-    usertype = forms.CharField(
-        label= "Student or Instructor",
-        initial = '', 
-        widget=forms.Select(choices=USERTYPE_CHOICES)
-    )
-
-    location = forms.CharField(
-        label="What City is your cohort in?",
-        widget=forms.Select(choices=LOCATION_CHOICES)
-    )
-
-    class_start_date = forms.DateField(
-        widget = forms.Select(choices=DATE_CHOICES),  
-    )
-
-    class_type = forms.CharField(
-        label = "Class Type", 
-        initial= '', 
-        widget = forms.Select(choices=CLASSTYPE_CHOICES)
-    ) 
-
+    usertype = forms.CharField(label= "Student or Instructor", initial = '', widget=forms.Select(choices=USERTYPE_CHOICES))
+    location = forms.CharField(label="What City is your cohort in?", widget=forms.Select(choices=LOCATION_CHOICES))
+    class_start_date = forms.DateField(widget = forms.Select(choices=DATE_CHOICES))
+    class_type = forms.CharField(label = "Class Type", initial= '', widget = forms.Select(choices=CLASSTYPE_CHOICES)) 
     # password1 = forms.CharField(max_length=30, label='', help_text='', widget=forms.PasswordInput(attrs={"placeholder": "Input your password"}))
     # password2 = forms.CharField(max_length=30, label='', help_text='', widget=forms.PasswordInput(attrs={"placeholder": "Confirm your password"}))
 
