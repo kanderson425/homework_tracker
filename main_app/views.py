@@ -52,31 +52,25 @@ def registration(request):
 #   else:
 #     return redirect('home')
 
-def CreateProfile(request):
-  print('IT WOKRS!!!')
-  print('IT WOKRS!!!')
-  print('IT WOKRS!!!')
-  print('IT WOKRS!!!')
+def CreateProfile(request, user_id):
+  print('CreateProfile is getting')
   error_message = ''
   if request.method == 'POST':
-    user_form = UserCreationForm(request.POST, instance=request.user)
-    profile_form = ProfileForm(request.POST, instance=request.user.profile)
-    print('The form is valid!')
-    if user_form.is_valid() and profile_form.is_valid():
-      print('The form is valid! 123456')
-      user = user_form.save(commit=False)
-      profile_form.save(commit=False)
-      login(request, user)
-      # return redirect('/')
-      # return HttpResonspseRedirect('index')
-    # return HttpResponseRedirect('/accounts/')
+    # user_form = UserCreationForm(request.POST, instance=request.user)
+    profile_form = ProfileForm(request.POST)
+    print('Made it past user_form & profile_form')
+    if profile_form.is_valid():
+      print('Forms have been validated')
+      new_profile = profile_form.save(commit=False)
+      new_profile.user_id = user_id
+      new_profile.save()
     else:
-      error_message = 'Invalid credentials - try again'
-      print(error_message)
+      msg = 'Errors: %s' % profile_form.errors.as_text()
+      print(msg)  
   else:
     print('We are hitting the redirect')
     user_form = UserCreationForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
-  return render(request, 'registration/signup.html', {'user_form': user_form, 'profile_form': profile_form})
+  return redirect('index', {'user_form': user_form, 'profile_form': profile_form, 'user_id': user_id})
  
       
