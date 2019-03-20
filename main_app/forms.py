@@ -7,7 +7,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Div, Submit, HTML, Button, Row, Field
 from crispy_forms.bootstrap import AppendedText, PrependedText, FormActions
 
-class RegistrationForm(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
     first_name = forms.CharField(max_length=30, label='', help_text='', widget=forms.TextInput(attrs={"placeholder": "Input your first name"}))
     last_name = forms.CharField(max_length=30, label='', help_text='', widget=forms.TextInput(attrs={"placeholder": "Input your last name"})) 
     # username = forms.CharField(max_length=30, label='', help_text='', widget=forms.TextInput(attrs={"placeholder": "Input username"}))
@@ -52,12 +52,12 @@ class RegistrationForm(forms.ModelForm):
             # 'password2'
         ]
 
-    helper = FormHelper()
-    helper.form_class = 'form-horizontal'
-    FormActions(
-        Submit('save_changes', 'Save changes', css_class="btn-primary"),
-        Submit('cancel', 'Cancel'),
-    )
+    # helper = FormHelper()
+    # helper.form_class = 'form-horizontal'
+    # FormActions(
+    #     Submit('save_changes', 'Save changes', css_class="btn-primary"),
+    #     Submit('cancel', 'Cancel'),
+    # )
     # )        
     
 # class MessageForm(forms.Form):
