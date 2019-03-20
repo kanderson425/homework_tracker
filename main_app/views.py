@@ -52,7 +52,7 @@ def registration(request):
 #   else:
 #     return redirect('home')
 
-def CreateProfile(request):
+def create_profile(request):
   print('CreateProfile is getting hit')
   error_message = ''
   if request.method == 'POST':
