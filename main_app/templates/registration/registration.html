@@ -7,7 +7,8 @@
     <div class="container center">
         {% csrf_token %}
         {{ form.as_table }}
-    <a class="btn" href="">Create Profile</a>
+        
+        <input type="submit" class="btn" value="Create Profile">
     </div>
 </form>
 {% endblock %}
