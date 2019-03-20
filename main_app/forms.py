@@ -10,7 +10,6 @@ from crispy_forms.bootstrap import AppendedText, PrependedText, FormActions
 class ProfileForm(forms.ModelForm):
     first_name = forms.CharField(max_length=30, label='', help_text='', widget=forms.TextInput(attrs={"placeholder": "Input your first name"}))
     last_name = forms.CharField(max_length=30, label='', help_text='', widget=forms.TextInput(attrs={"placeholder": "Input your last name"})) 
-    # username = forms.CharField(max_length=30, label='', help_text='', widget=forms.TextInput(attrs={"placeholder": "Input username"}))
     email = forms.EmailField(max_length=250, label='', help_text='', widget=forms.TextInput(attrs={"placeholder": "Input your email"}))
 
     usertype = forms.CharField(
@@ -51,6 +50,9 @@ class ProfileForm(forms.ModelForm):
             # 'password1', 
             # 'password2'
         ]
+
+
+
 
     # helper = FormHelper()
     # helper.form_class = 'form-horizontal'

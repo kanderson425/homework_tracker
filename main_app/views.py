@@ -6,6 +6,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import TemplateView
 from django.contrib.auth.forms import UserCreationForm
 from .forms import ProfileForm
+# from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth import login 
 from .models import Profile
@@ -52,20 +53,30 @@ def registration(request):
 #     return redirect('home')
 
 def CreateProfile(request):
+  print('IT WOKRS!!!')
+  print('IT WOKRS!!!')
+  print('IT WOKRS!!!')
+  print('IT WOKRS!!!')
   error_message = ''
   if request.method == 'POST':
     user_form = UserCreationForm(request.POST, instance=request.user)
     profile_form = ProfileForm(request.POST, instance=request.user.profile)
+    print('The form is valid!')
     if user_form.is_valid() and profile_form.is_valid():
-      user = user_form.save()
-      profile_form.save()
+      print('The form is valid! 123456')
+      user = user_form.save(commit=False)
+      profile_form.save(commit=False)
       login(request, user)
-      return redirect('index')
+      # return redirect('/')
+      # return HttpResonspseRedirect('index')
+    # return HttpResponseRedirect('/accounts/')
     else:
       error_message = 'Invalid credentials - try again'
+      print(error_message)
   else:
+    print('We are hitting the redirect')
     user_form = UserCreationForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
-    return redirect('signup')
+  return render(request, 'registration/signup.html', {'user_form': user_form, 'profile_form': profile_form})
  
       
