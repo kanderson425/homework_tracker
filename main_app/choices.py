@@ -33,3 +33,8 @@ DATE_CHOICES = (
     ('Feb', ("Feb - 2019")),
     ('Mar', ("Mar - 2019"))
 )
+
+ASSIGNMENT_STATUS_CHOICES = (
+    ('Complete', ("Complete")),
+    ('Incomplete', ("Incomplete"))
+)

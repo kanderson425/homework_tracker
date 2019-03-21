@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- dynamicly populates with user photo, information and github link -->
+<main class="container">
+        <div class="row">
+              <h2 class="page-head">Student View</h2>
+      <div class="col s6">
+        <div class="card">
+          <div class="card-image">
+            <img src="images/sample-1.jpg">
+          </div>
+          <div class="card-content">
+            <p>I am a very simple card. I am good at containing small bits of information.
+            I am convenient because I require little markup to use effectively.</p>
+          </div>
+          <div class="card-action">
+            <a href="#">This is a link</a>
+          </div>
+        </div>
+      </div>
+      <div class="col s6">
+          <!-- Iterate through the courses and dynamically
+              populate them with the course relevant data -->
+              
+              <!-- Below are the collapsible units -->
+              <ul class="collapsible container">
+                  <li>
+                      <div class="collapsible-header">Unit No.</div>
+                      <div class="collapsible-body"></div>
+                  </div>
+                  
+              </div>
+              </main>
+
+{% endblock %}

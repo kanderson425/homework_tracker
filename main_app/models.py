@@ -6,7 +6,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver 
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-from .choices import USERTYPE_CHOICES, LOCATION_CHOICES, CLASSTYPE_CHOICES, DATE_CHOICES
+from .choices import USERTYPE_CHOICES, LOCATION_CHOICES, CLASSTYPE_CHOICES, DATE_CHOICES, ASSIGNMENT_STATUS_CHOICES
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -20,6 +20,20 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user} Profile'
+
+class Unit(models.Model):
+    number = models.IntegerField()
+    name = models.CharField(max_length=100) 
+
+class Week(models.Model):
+    unit = models.ForeignKey(Unit, on_delete=models.CASCADE)
+    number = models.IntegerField() 
+        
+class Assignment(models.Model):
+    week = models.ForeignKey(Week, on_delete=models.CASCADE)
+    number = models.IntegerField() 
+    status = models.CharField(max_length=200, choices=ASSIGNMENT_STATUS_CHOICES)
+    description = models.CharField(max_length=200)
 
 # @receiver(post_save, sender=User)
 # def create_user_profile(sender, instance, created, **kwargs):
@@ -44,7 +58,11 @@ class Profile(models.Model):
 #         user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 # class AssignmentUpload(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     description = models.CharField(max_length=255, blank=True)
+#     document = models.FileField(upload_to='documents/')
+#     uploaded_at = models.DateTimeField(auto_now_add=True)
+
 
 # class Comment(models.Model):
 #     user = models.OneToOneField(User, on_delete=models.CASCADE)

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Iterate through the courses and dynamically
+              populate them with the course relevant data -->
+              
+              <!-- Below are the collapsible units -->
+<body class = "container">   
+        <div class = "row">
+           <form class = "col s12">
+              <div class = "row">
+                 <label>Add Assignment</label>
+                 <div class = "file-field input-field">
+                    <div class = "btn">
+                       <span>Browse</span>
+                       <input type = "file" />
+                    </div>
+                    <!-- upload files to the unit -->
+                    <div class = "file-path-wrapper">
+                       <input class = "file-path validate" type = "text"
+                          placeholder = "Upload file" />
+                    </div>
+                 </div>
+              </div>
+
+
+{% endblock %}

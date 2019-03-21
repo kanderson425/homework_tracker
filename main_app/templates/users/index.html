@@ -3,26 +3,37 @@
 
 <!-- Iterate through the courses and dynamically
 populate them with the course relevant data -->
-<h2 class="account-heading">Welcome {{ user.profile.first_name }}</h2>
-{% if user.profile.usertype == 'Instructor' %}
-<p>{{ user.profile.last_name }} {{user.profile.usertype }} {{user.profile.email }}</p>
-{% else %}
-<h2>You are a {{ user.profile.usertype }}!</h2>
-{% endif %}
+
+<h5>Welcome {{ user.profile.first_name}}</h5>
+<h6>Your cohort is: {{user.profile.class_type}}</h6>
+
+{% for unit in units %}
+  <a href="{% url 'detail' unit.id %}">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">{{ unit.number}}</span>
+        <p>Description: {{unit.description }}</p>
+      
+      </div>
+    </div>
+  </a>
+{% endfor %}
+
+
 <!-- Below are the collapsible units -->
-<ul class="collapsible container">
+<!-- <ul class="collapsible" data-collapsible="accordion">
   <li>
     <div class="collapsible-header">Unit No.</div>
-    <div class="collapsible-body">
+    <div class="collapsible-body"> -->
         <!-- Below are the collapsible weeks -->
-        <ul class="collapsible">
+        <!-- <ul class="collapsible">
         <li>
           <div class="collapsible-header">Week No.</div>
-          <div class="collapsible-body">
+          <div class="collapsible-body"> -->
             <!-- Below are the collapsible days -->
-            <ul class="collapsible">
+            <!-- <ul class="collapsible">
               <li class="mon">
-                <div class="collapsible-header">Week No.</div>
+                <div class="collapsible-header">Day</div>
                 <div class="collapsible-body">
               </li>
               <li class="tue">
@@ -41,14 +52,23 @@ populate them with the course relevant data -->
                 <div class="collapsible-header">Week No.</div>
                 <div class="collapsible-body">
               </li>
-            </ul>
+            </ul> -->
             <!-- End collapsible days -->
-          </div>
+          <!-- </div>
         </li>
-      </ul>
+      </ul> -->
       <!-- End collapsible weeks -->
-    </div>
+    <!-- </div>
   </li>
-</ul>
+</ul> -->
 
+<!-- File Upload Form-->
+<form method="post" action="" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Upload</button>
+</form>
+
+<p><a href="{% url 'home' %}">Return to home</a></p>
 {% endblock %}
+

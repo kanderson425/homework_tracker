@@ -1,8 +1,10 @@
 from django.contrib import admin
-from .models import Profile
+from .models import Profile, Assignment
 # from django.contrib.auth.models import User
 
 admin.site.register(Profile)
+admin.site.register(Assignment)
+# admin.site.register(AssignmentUpload)
 # Define an inline admin descriptor for Employee model
 # which acts a bit like a singleton
 # class ProfileInline(admin.StackedInline):

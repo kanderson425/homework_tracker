@@ -33,6 +33,10 @@ class ProfileForm(forms.ModelForm):
             # 'password2'
         ]
 
+# class AssignmentUploadForm(forms.ModelForm):
+#     class Meta:
+#         model = AssignmentUpload
+#         fields = ('description', 'document',)
 
 
 

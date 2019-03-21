@@ -6,7 +6,25 @@ body {
 main {
   flex: 1 0 auto !important;
 }
-
-select {
-  background-color: rgb(238, 110, 115);
-  border: solid black 2px;
+.card{
+  width: 300px;
+  height: 300px;
+  border: 3px;
+  box-sizing: border-box;
+  border-radius: 25px;
+}
+.page-head{
+  text-align: center;
+}
+.card-image{
+  width: 300px;
+  height: 150px;
+}
+/* modal styling */
+/* .center-modal {
+  display: flex;
+}
+.center-modal .modal {
+  position: relative;
+  width: auto;
+} */

@@ -1,6 +1,58 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<!-- Iterate through the courses and dynamically
+populate them with the course relevant data -->
 
+<!-- Below are the collapsible units -->
+<ul class="collapsible" data-collapsible="accordion">
+  <li>
+    <div class="collapsible-header">Unit No.</div>
+    <div class="collapsible-body">
+        <!-- Below are the collapsible weeks -->
+        <ul class="collapsible">
+        <li>
+          <div class="collapsible-header">Week No.</div>
+          <div class="collapsible-body">
+            <!-- Below are the collapsible days -->
+            <ul class="collapsible">
+              <li class="mon">
+                <div class="collapsible-header">Day</div>
+                <div class="collapsible-body">
+              </li>
+              <li class="tue">
+                <div class="collapsible-header">Week No.</div>
+                <div class="collapsible-body">
+              </li>
+              <li class="wed">
+                <div class="collapsible-header">Week No.</div>
+                <div class="collapsible-body">
+              </li>
+              <li class="thu">
+                <div class="collapsible-header">Week No.</div>
+                <div class="collapsible-body">
+              </li>
+              <li class="fri">
+                <div class="collapsible-header">Week No.</div>
+                <div class="collapsible-body">
+              </li>
+            </ul>
+            <!-- End collapsible days -->
+          </div>
+        </li>
+      </ul>
+      <!-- End collapsible weeks -->
+    </div>
+  </li>
+</ul>
+
+<!-- File Upload Form-->
+<form method="post" action="{% url 'assignment_upload' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Upload</button>
+</form>
+
+<p><a href="{% url 'home' %}">Return to home</a></p>
 
 {% endblock %}
