@@ -100,3 +100,6 @@ class ProfileForm(forms.ModelForm):
 #             Submit('cancel', 'Cancel'),
 #         )
 #     )
+
+
+# class CohortCreationForm(forms.ModelForm):

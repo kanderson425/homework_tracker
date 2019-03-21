@@ -4,6 +4,11 @@
 <!-- Iterate through the courses and dynamically
 populate them with the course relevant data -->
 <h2 class="account-heading">Welcome {{ user.profile.first_name }}</h2>
+{% if user.profile.usertype == 'Instructor' %}
+<p>{{ user.profile.last_name }} {{user.profile.usertype }} {{user.profile.email }}</p>
+{% else %}
+<h2>You are a {{ user.profile.usertype }}!</h2>
+{% endif %}
 <!-- Below are the collapsible units -->
 <ul class="collapsible container">
   <li>

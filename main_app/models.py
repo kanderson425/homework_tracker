@@ -39,6 +39,18 @@ class Profile(models.Model):
 # class Student(models.Model):
 #     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
-class Assignment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+# class Cohort(models.Model):
+#         user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+# class AssignmentUpload(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+# class Comment(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+
+
+
+
 

@@ -41,17 +41,6 @@ def registration(request):
   user = request.user
   return render(request, 'registration/registration.html', {'form': ProfileForm})
 
-
-# def CreateProfile(request, user_id):
-#   form = ProfileForm(request.POST)
-#   if form.is_valid():
-#     new_profile = form.save(commit=False)
-#     new_profile.user_id = user_id
-#     new_profile.save()
-#     return redirect('index', user_id=user_id)
-#   else:
-#     return redirect('home')
-
 def create_profile(request):
   print('CreateProfile is getting hit')
   error_message = ''
@@ -64,12 +53,9 @@ def create_profile(request):
       new_profile = profile_form.save(commit=False)
       new_profile.user = request.user
       print('new_profile.user = request.user is working')
-      # new_profile.save()
-      # print(new_profile)
-      # print(new_profile.user)
-      print(profile_form)
+      # print(profile_form)
       profile_form.save()
-      # print(profile_form.save())
+      print(profile_form.save())
     else:
       msg = 'Errors: %s' % profile_form.errors.as_text()
       print(msg)  
@@ -78,15 +64,19 @@ def create_profile(request):
     user_form = UserCreationForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
   return redirect('index')
- 
+       
 
-# def CreateProfile(request, user_id):
-#   form = ProfileForm(request.POST)
-#   if form.is_valid():
+# def add_comment(request):
+#   #instructor can comment on assignments
 
-#     new_profile = form.save(commit=False)
-#     new_profile.user_id = user_id
-#     new_profile.save()
-#   return redirect('index')
-      
-      
+# def add_assignment(request):
+#   #instructor can add an assignment
+
+# def view_assignment(request):
+#   #instructor or student can view assignment
+
+# def delete_assignment(request):
+#   #instructor or student can view assignment
+
+# def updload_assignment(request):
+#   #student can upload an assignment 
