@@ -41,3 +41,4 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Assignment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
