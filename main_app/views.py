@@ -63,7 +63,9 @@ def create_profile(request):
       print('Forms have been validated')
       new_profile = profile_form.save(commit=False)
       new_profile.user = request.user
-      new_profile.save()
+      print('new_profile.user = request.user is working')
+      # new_profile.save()
+      print(ProfileForm)
     else:
       msg = 'Errors: %s' % profile_form.errors.as_text()
       print(msg)  
@@ -71,7 +73,7 @@ def create_profile(request):
     print('We are hitting the redirect')
     user_form = UserCreationForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
-  return render('index', {'user': request.user})
+  return redirect('index')
  
 
 # def CreateProfile(request, user_id):

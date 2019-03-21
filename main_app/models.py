@@ -12,7 +12,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200) 
-    email = models.EmailField(max_length=200)
+    email = models.CharField(max_length=200)
     usertype = models.CharField(max_length=200,choices=USERTYPE_CHOICES)
     location = models.CharField(max_length=200,choices=LOCATION_CHOICES)
     class_start_date = models.CharField(max_length=200,choices=DATE_CHOICES, default='Jan-2019')
