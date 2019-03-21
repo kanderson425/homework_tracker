@@ -65,7 +65,11 @@ def create_profile(request):
       new_profile.user = request.user
       print('new_profile.user = request.user is working')
       # new_profile.save()
-      print(ProfileForm)
+      # print(new_profile)
+      # print(new_profile.user)
+      print(profile_form)
+      profile_form.save()
+      # print(profile_form.save())
     else:
       msg = 'Errors: %s' % profile_form.errors.as_text()
       print(msg)  
