@@ -21,8 +21,11 @@
                     <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Homework Tracker</a></li>
                 </ul>
                 <ul class="right">
+                    <li><a href="{% url 'about' %}">About</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'assignment' %}">Upload Assignments</a></li>
+                        <li><a href="{% url 'objectives_create' %}">Add an Objective</a></li>
+                        <li><a href="{% url 'objectives_index' %}">View All Objectives</a></li>
+                        <li><a href="{% url 'assignments_create' %}">Add an Assignment</a></li>
                         <li><a href="{% url 'index' %}">View My Assignments</a></li>
                         <li><a href="{% url 'logout' %}">Log Out</a></li>
                     {% else %}
@@ -38,7 +41,7 @@
         {% endblock %}
     </main>
   	<footer class="page-footer">
-       <div class="right">All Rights Reserved, &copy; 2019 Guitar Collector &nbsp;</div>
+       <div class="right">All Rights Reserved, &copy; 2019 HomeWork Track by the_happy_little_coders &nbsp;</div>
     </footer>
 </body>
 </html>

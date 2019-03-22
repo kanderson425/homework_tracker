@@ -1,27 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Guitar Details</h1>
+<h1>Assignment Details</h1>
 
 <div class="row">
   <div class="col s6">
     <div class="card">
       <div class="card-content">
-          <span class="card-title">{{ guitar.name }}</span>
-          <p>Type: {{ guitar.make }} {{guitar.model}}</p>
-          <p>Description: {{ guitar.description }}</p>
+          <span class="card-title">{{ assignment.name }}</span>
+          <p>Type: {{ assignment.make }} {{assignment.model}}</p>
+          <p>Description: {{ assignment.description }}</p>
       </div>
       <div class="card-action">
-        <a href="{% url 'guitars_update' guitar.id %}">Edit</a>
-        <a href="{% url 'guitars_delete' guitar.id %}">Delete</a>
+        <a href="{% url 'assignments_update' assignment.id %}">Edit</a>
+        <a href="{% url 'assignments_delete' assignment.id %}">Delete</a>
       </div>
     </div>
-    {% for photo in cat.photo_set.all %}
+    {% for photo in assignment.photo_set.all %}
       <img class="responsive-img card-panel" src="{{photo.url}}">
     {% empty %}
       <div class="card-panel teal-text center-align">No Photos Uploaded</div>
     {% endfor %}
-    <form action="{% url 'add_photo' guitar.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+    <form action="{% url 'add_photo' assignment.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
       {% csrf_token %}
       <input type="file" name="photo-file">
       <br><br>
@@ -29,26 +29,21 @@
     </form> 
   </div> 
   <div class="col s6">
-    <form action="{% url 'add_practice' guitar.id %}" method="post">
+    <form action="{% url 'add_feedback' assignment.id %}" method="post">
       {% csrf_token %}
-      {{ practice_form.as_p }}
-      <input type="submit" class="btn" value="Add Practice">
+      {{ feedback_form.as_p }}
+      <input type="submit" class="btn" value="Add Feedback">
     </form>
     <br>
-    {% if guitar.practice_enough_for_today %}
-      <div class="card-panel teal-text center-align">I guess you've practiced enough.</div>
-    {% else %}
-      <div class="card-panel teal-text center-align">Yeah, you definitely need to practice more.</div>
-    {% endif %}
     <table class="striped">
       <thead>
         <tr><th>Date</th><th>Duration</th></tr>
       </thead>
       <tbody>
-        {% for practice in guitar.practice_set.all %}
+        {% for feedback in assignment.feedback_set.all %}
           <tr>
-            <td>{{practice.date}}</td>
-            <td>{{practice.get_hour_display}}</td>
+            <td>{{feedback.date}}</td>
+            <td>{{feedback.get_hour_display}}</td>
           </tr>
         {% endfor %}
       </tbody>
@@ -58,34 +53,34 @@
 <hr>
 <div class="row">
   <div class="col s6">
-    <h3>{{ guitar.name}}'s Amps</h3>
-    {% if guitar.amps.count %}
-      {% for amp in guitar.amps.all %}
+    <h3>{{ assignment.name}}'s Objectives</h3>
+    {% if assignment.objectives.count %}
+      {% for objective in assignment.objectives.all %}
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-              <span>{{amp.make}} - {{amp.model}}</span>
+              <span>{{objective.make}} - {{objective.model}}</span>
             </span>
           </div>
         </div>
       {% endfor %}
     {% else %}
-        <h5>No Amps :(</h5>
+        <h5>No Objectives :(</h5>
     {% endif %}
   </div>
   <!-- Available amps will come after this line-->
   <div class="col s6">
-    <h3>Available Amps</h3>
-    {% if amps.count %}
-      {% for amp in amps.all %}
+    <h3>Available Objectives</h3>
+    {% if objectives.count %}
+      {% for objective in objectives.all %}
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-              A <span>{{amp.make}} - {{amp.model}}</span>
+              A <span>{{objective.make}} - {{objective.model}}</span>
             </span>
           </div>
           <div class="card-action">
-            <form action="{% url 'assoc_amp' guitar.id amp.id %}" method="post">
+            <form action="{% url 'assoc_objective' assignment.id objective.id %}" method="post">
               {% csrf_token %}
               <button type="submit" class="btn">Add</button>
             </form>
@@ -93,7 +88,7 @@
         </div>
       {% endfor %}
     {% else %}
-      <h5>{{guitar.name}} Already Has All Amps Available</h5>
+      <h5>{{assignment.name}} Already Has All Objectives Available</h5>
     {% endif %}
   </div>
 </div>

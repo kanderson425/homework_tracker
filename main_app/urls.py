@@ -1,30 +1,23 @@
-from django.urls import path, include
-from django.conf.urls import url
-from . import views
-from django.conf import settings
-from django.conf.urls.static import static
+from django.urls import path, include 
+from . import views 
 
 urlpatterns = [
   path('', views.home, name='home'),
   path('accounts/signup/', views.signup, name='signup'),
-  path('accounts/register/', views.registration, name='registration'),
-  path('accounts/create_profile/', views.create_profile, name='create_profile'),
   path('accounts/', include('django.contrib.auth.urls')),
   path('about/', views.about, name='about'),
   path('assignments/', views.assignments_index, name='index'),
-  # path('guitars/<int:guitar_id>/', views.guitars_detail, name='detail'),
-  path('assignments/create/', views.assignment, name='assignment'),
-  path('assignments/create/new/', views.create_assignment, name='create_assignment'),
-  # path('guitars/<int:pk>/update/', views.GuitarUpdate.as_view(), name='guitars_update'),
-  # path('guitars/<int:pk>/delete/', views.GuitarDelete.as_view(), name='guitars_delete'),
-  # path('guitars/<int:guitar_id>/add_practice/', views.add_practice, name='add_practice'),
-  # path('guitars/<int:guitar_id>/assoc_amp/<int:amp_id>/', views.assoc_amp, name='assoc_amp'),
-  # path('guitars/<int:guitar_id>/unassoc_amp/<int:amp_id>/', views.unassoc_amp, name='unassoc_amp'),
-  # path('guitars/<int:guitar_id>/add_photo/', views.add_photo, name='add_photo'),
-  # path('amps/', views.AmpList.as_view(), name='amps_index'),
-  # path('amps/<int:pk>/', views.AmpDetail.as_view(), name='amps_detail'),
-  # path('amps/create/', views.AmpCreate.as_view(), name='amps_create'),
-  # path('amps/<int:pk>/update/', views.AmpUpdate.as_view(), name='amps_update'),
-  # path('amps/<int:pk>/delete/', views.AmpDelete.as_view(), name='amps_delete'),
-  
+  path('assignments/<int:assignment_id>/', views.assignments_detail, name='detail'),
+  path('assignments/create/', views.assignmentCreate.as_view(), name='assignments_create'),
+  path('assignments/<int:pk>/update/', views.assignmentUpdate.as_view(), name='assignments_update'),
+  path('assignments/<int:pk>/delete/', views.assignmentDelete.as_view(), name='assignments_delete'),
+  path('assignments/<int:assignment_id>/add_feedback/', views.add_feedback, name='add_feedback'),
+  path('assignments/<int:assignment_id>/assoc_objective/<int:objective_id>/', views.assoc_objective, name='assoc_objective'),
+  path('assignments/<int:assignment_id>/unassoc_objective/<int:objective_id>/', views.unassoc_objective, name='unassoc_objective'),
+  path('assignments/<int:assignment_id>/add_photo/', views.add_photo, name='add_photo'),
+  path('objectives/', views.objectiveList.as_view(), name='objectives_index'),
+  path('objectives/<int:pk>/', views.objectiveDetail.as_view(), name='objectives_detail'),
+  path('objectives/create/', views.objectiveCreate.as_view(), name='objectives_create'),
+  path('objectives/<int:pk>/update/', views.objectiveUpdate.as_view(), name='objectives_update'),
+  path('objectives/<int:pk>/delete/', views.objectiveDelete.as_view(), name='objectives_delete'),
 ]

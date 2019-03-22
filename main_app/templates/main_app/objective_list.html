@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Objective List</h1>
+
+{% for objective in objective_list %}
+  <a href="{% url 'objectives_detail' objective.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ objective.unit }}-{{objective.description}}</span>
+        </div>
+    </div>
+  </a>
+{% endfor %}
+
+{% endblock %}
