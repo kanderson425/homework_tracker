@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Assignment List</h1>
+
+{% for assignment in assignments %}
+    <div class="index-card">
+        <a href="{% url 'detail' assignment.id %}">
+            <div class="index-card-content">
+                <span class="card-title">{{ assignment.number }}</span>
+                <p>Description: {{ assignment.description }}</p>
+                <p>Status: {{ assignment.status }}</p>
+            </div>
+        </a>
+    </div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" defer></script>
+  <script src="{% static 'scripts/script.js' %}" type="text/javscript" defer></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <title>GA Homework Tracker</title>
+</head>
+<body>
+    <header class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <ul>
+                    <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Homework Tracker</a></li>
+                </ul>
+                <ul class="right">
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'assignment' %}">Upload Assignments</a></li>
+                        <li><a href="{% url 'index' %}">View My Assignments</a></li>
+                        <li><a href="{% url 'logout' %}">Log Out</a></li>
+                    {% else %}
+                        <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                        <li><a href="{% url 'login' %}">Log In</a></li>
+                    {% endif %}    
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+  	<footer class="page-footer">
+       <div class="right">All Rights Reserved, &copy; 2019 Guitar Collector &nbsp;</div>
+    </footer>
+</body>
+</html>
+
+<script>
+$(document).ready(function() {
+    $('select').attr("class", "browser-default")
+});
+</script>

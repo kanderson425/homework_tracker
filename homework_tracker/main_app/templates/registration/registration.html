@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Insert h3 at top that fades out -->
+<h3>Okay, let's create your profile!</h3>
+<hr>
+<form action="{% url 'create_profile' %}" class='registration_form' method='post'>
+    <div class="container center">
+        {% csrf_token %}
+        {{ form.as_table }}
+        
+        <input type="submit" class="btn" value="Create Profile">
+    </div>
+</form>
+{% endblock %}
