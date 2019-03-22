@@ -1,6 +1,6 @@
 from django.urls import path, include
 from django.conf.urls import url
-from .import views
+from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -13,8 +13,8 @@ urlpatterns = [
   path('about/', views.about, name='about'),
   path('assignments/', views.assignments_index, name='index'),
   # path('guitars/<int:guitar_id>/', views.guitars_detail, name='detail'),
-  path('assignments/', views.assignment, name='assignment'),
-  path('assignments/create', views.create_assignment, name='create_assignment'),
+  path('assignments/create/', views.assignment, name='assignment'),
+  path('assignments/create/new/', views.create_assignment, name='create_assignment'),
   # path('guitars/<int:pk>/update/', views.GuitarUpdate.as_view(), name='guitars_update'),
   # path('guitars/<int:pk>/delete/', views.GuitarDelete.as_view(), name='guitars_delete'),
   # path('guitars/<int:guitar_id>/add_practice/', views.add_practice, name='add_practice'),

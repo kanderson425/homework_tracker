@@ -24,9 +24,10 @@ class Profile(models.Model):
 class Assignment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    github_url = models.URLField()
+    github_url = models.CharField(max_length=500)
     status = models.CharField(max_length=200, choices=ASSIGNMENT_STATUS_CHOICES)
     description = models.CharField(max_length=200)
+
 
 # HOURS = (
 #     ('1', '1 hour'),

@@ -58,23 +58,23 @@ def assignment(request):
     return render(request, 'main_app/assignment_form.html', {'form': UploadAssignmentForm})
 
 @login_required
-def create_assignment(request):
-    if request.method == 'POST':
-        assignment_form = UploadAssignmentForm(request.POST)
-        print('Passing the assignment_form')
-        if assignment_form.is_valid():
-            new_assignment = assignment_form.save(commit=False)
-            assignment_form.user = request.user
-            print('Passing the assignment_form.user')
-            assignment_form.save()
-            print('Passing the assignment_form.save')
-        else:
-            msg = 'Errors: %s' % assignment_form.errors.as_text()
-            print(msg)  
-    else:
-        print('We are hitting the redirect')
-        assignment_form = UploadAssignmentForm(instance=request.user.profile)
-        return redirect('index')
+def create_assignment(request, user_id):
+  if request.method == 'POST':
+      form = UploadAssignmentForm(request.POST)
+      print(form)
+      if form.is_valid():
+        new_assignment = form.save(commit=False)
+        new_assignment.user_id = user_id
+        print(form.user)
+        print('Passing the assignment_form.user')
+        new_assignment.save()
+      else:
+        msg = 'Errors: %s' % form.errors.as_text()
+        print(msg)  
+  else:
+    print('We are hitting the redirect')
+    form = UploadAssignmentForm(instance=request.user)
+    return redirect('index', user_id=user_id)
 
 
 # class AssignmentCreate(LoginRequiredMixin, CreateView):
@@ -84,12 +84,6 @@ def create_assignment(request):
 #     def form_valid(self, form):
 #         form.instance.user = self.request.user
 #         return super().form_valid(form) 
-
-
-
-
-
-
 
 
 
