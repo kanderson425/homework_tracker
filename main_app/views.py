@@ -5,10 +5,10 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import FeedbackForm
+from main_app.forms import FeedbackForm
 import uuid
 import boto3
-from .models import Assignment, Objective, Photo
+from main_app.models import Assignment, Objective, Photo
 
 
 
