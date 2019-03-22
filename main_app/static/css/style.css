@@ -16,11 +16,11 @@ main {
   padding-top: 0;
   margin-top: 10px;
   text-align: right;
-  background-color: #6690E1;
+  background-color: #3D9970 !important;
 }
 
-nav {
-  background-color: #6690E1;
+#nav {
+  background-color: #3D9970 !important;
   padding-top: 0;
   margin: 0;
       
@@ -56,18 +56,22 @@ img {
 
 .index-card {
   background-color: white;
-  color: #6690E1;
+  color: #3D9970;
   border: solid black 3px;
   border-radius: 2%;
   margin: 10px;
 }
 
 .index-card:hover {
-  background-color: #6690E1;
+  background-color: #3D9970;
   color: white;
 }
 
 .index-card-content:hover {
   color: white;
+}
+
+#container-center {
+  height: 30%;
 }
 

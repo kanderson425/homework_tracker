@@ -16,7 +16,7 @@ ASSIGNMENT_STATUS_CHOICES = (
 
 class Objective(models.Model):
     unit = models.CharField(max_length=50)
-    description = models.CharField(max_length=50)
+    description = models.CharField(max_length=1000)
 
     def __str__(self):
         return self.unit
